@@ -1,0 +1,47 @@
+.victory {
+    background-color: #008f00;
+}
+
+.defeat {
+    background-color: #8f0000;
+}
+
+.match {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: var(--panelcolor); */
+    padding: .8rem 1rem .8rem .8rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+}
+
+.match img {
+    width: 75px;
+    height: 75px;
+}
+
+.match-items {
+    display: flex;
+    gap: .2rem;
+    padding: .2rem;
+    /* background-color: var(--darkblue); */
+}
+
+.match-items img {
+    width: 40px;
+    height: 40px;
+}
+
+.match .match-result {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.match .match-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
