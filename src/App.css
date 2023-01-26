@@ -52,6 +52,7 @@ body {
     max-width: 1400px;
 }
 
-.matches-list {
-    width: 100%;
+.match-list {
+    width: 50%;
+    margin: 0 auto;
 }
