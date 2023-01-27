@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Summoner from './components/Summoner';
 import Mastery from './components/Mastery';
-import { champIconsUrl, champUrl, endpoint } from './config';
+import { champIconsUrl, champUrl, endpoint, regionalEndpoint } from './config';
 import './App.css';
 import Match from './components/Match';
 
@@ -13,6 +13,7 @@ function App() {
   const [summonerData, setSummonerData] = useState(null);
   const [summonerMastery, setSummonerMastery] = useState(null);
   const [summonerName, setSummonerName] = useState('');
+  const [matchesId, setMatchesId] = useState(null);
 
   const [summonerError, setSummonerError] = useState(false);
 
@@ -39,9 +40,31 @@ function App() {
     .then(response => {
       setSummonerError(false);
       setSummonerData(response.data);
-      return endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${response.data.id}`);
-    }).then(response => setSummonerMastery(response.data))
-    .catch(error => setSummonerError(true));
+      getMastery(response.data.id);
+      getMatches(response.data.puuid);
+    })
+    .catch(error => {
+      console.log(error);
+      setSummonerError(true)
+    });
+  }
+
+  function getMastery(id) {
+    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`)
+    .then(response => setSummonerMastery(response.data))
+    .catch(error => {
+      console.log(error);
+      setSummonerError(true);
+    })
+  }
+
+  function getMatches(id) {
+    regionalEndpoint.get(`/lol/match/v5/matches/by-puuid/${id}/ids?start=0&count=10`)
+    .then(response => setMatchesId(response.data))
+    .catch(error => {
+      console.log(error);
+      setSummonerError(true);
+    })
   }
 
   return (
@@ -61,9 +84,9 @@ function App() {
         <div className='summoner'>
           <Summoner data={summonerData}/>
           <hr style={{opacity: 0.6}}/>
-          <div className='match-list'>
-            <Match summonerId={summonerData.puuid} champions={champions}/>
-          </div>
+          {matchesId && <div className='match-list'>
+            {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
+          </div>}
           {summonerMastery && 
             <Mastery data={summonerMastery} champions={champions}/>}
         </div>

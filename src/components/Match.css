@@ -45,3 +45,10 @@
     align-items: center;
     gap: .5rem;
 }
+
+.match .no-item {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #050505;
+}
