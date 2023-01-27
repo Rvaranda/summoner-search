@@ -53,6 +53,11 @@ body {
 }
 
 .match-list {
-    width: 50%;
-    margin: 0 auto;
+    width: 70%;
+    margin: 60px auto;
+}
+
+.match-list h2 {
+    text-align: center;
+    margin-bottom: 30px;
 }

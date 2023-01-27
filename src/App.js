@@ -84,9 +84,11 @@ function App() {
         <div className='summoner'>
           <Summoner data={summonerData}/>
           <hr style={{opacity: 0.6}}/>
-          {matchesId && <div className='match-list'>
-            {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
-          </div>}
+          {matchesId && (
+            <div className='match-list'>
+              <h2>Últimas partidas</h2>
+              {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
+            </div>)}
           {summonerMastery && 
             <Mastery data={summonerMastery} champions={champions}/>}
         </div>

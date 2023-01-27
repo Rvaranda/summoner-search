@@ -7,6 +7,8 @@ import './Match.css';
 
 function Match({summonerId, matchId, champions}) {
     const [matchData, setMatchData] = useState(null);
+    const [duration, setDuration] = useState(null);
+    const [creationDate, setCreationDate] = useState(null);
     const [summoner, setSummoner] = useState(null);
 
     useEffect(() => {
@@ -15,7 +17,22 @@ function Match({summonerId, matchId, champions}) {
             response.data.info.participants.forEach(element => {
                 if (element.puuid === summonerId) setSummoner(element);
             });
+
+            let created = new Date(response.data.info.gameCreation);
+
+            // gameDuration está em segundos, entao multiplica por 1000 para passar para milisegundos
+            let dur = new Date(response.data.info.gameDuration * 1000)
+
             setMatchData(response.data);
+            setCreationDate({
+                day: created.getDate() < 10 ? `0${created.getDate()}` : created.getDate(),
+                month: created.getMonth()+1 < 10 ? `0${created.getMonth()+1}` : created.getMonth()+1,
+                year: created.getFullYear()
+            });
+            setDuration({
+                minutes: dur.getMinutes() < 10 ? `0${dur.getMinutes()}` : dur.getMinutes(),
+                seconds: dur.getSeconds() < 10 ? `0${dur.getSeconds()}` : dur.getSeconds(),
+             });
         });
     }, []);
 
@@ -38,8 +55,8 @@ function Match({summonerId, matchId, champions}) {
             </div>
             <p className='match-result'>{summoner.win ? 'Vitória' : 'Derrota'}</p>
             <div className='match-info'>
-                <p>Duração</p>
-                <p>Data</p>
+                {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
+                {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
             </div>
         </div>
         }
