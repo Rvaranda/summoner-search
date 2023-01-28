@@ -50,7 +50,7 @@ function App() {
   }
 
   function getMastery(id) {
-    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`)
+    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}/top?count=10`)
     .then(response => setSummonerMastery(response.data))
     .catch(error => {
       console.log(error);
@@ -79,20 +79,23 @@ function App() {
           <button type='submit' onClick={(e) => getSummoner(e)}>Pesquisar</button>
         </div>
       </form>
-      {summonerError && <h1 style={{textAlign: 'center'}}>Invocador não encontrado</h1>}
-      {(summonerData && !summonerError) && (
-        <div className='summoner'>
-          <Summoner data={summonerData}/>
-          <hr style={{opacity: 0.6}}/>
-          {matchesId && (
-            <div className='match-list'>
-              <h2>Últimas partidas</h2>
-              {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
-            </div>)}
-          {summonerMastery && 
-            <Mastery data={summonerMastery} champions={champions}/>}
+      {summonerError ? <h1 style={{textAlign: 'center'}}>Invocador não encontrado</h1> :
+        <div className='wrapper'>
+          {summonerData && (
+            <>
+              <Summoner data={summonerData}/>
+              <hr style={{opacity: 0.6}}/>
+              {matchesId && (
+                <div className='match-list'>
+                  <h2>Últimas partidas</h2>
+                  {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
+                </div>)}
+              {summonerMastery && 
+                <Mastery data={summonerMastery} champions={champions}/>}
+            </>
+          )}
         </div>
-      )}
+      }
     </div>
   );
 }

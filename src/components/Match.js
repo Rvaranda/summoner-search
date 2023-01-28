@@ -54,9 +54,17 @@ function Match({summonerId, matchId, champions}) {
                 {summoner.item6 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item6}.png`} alt='item'/>}
             </div>
             <p className='match-result'>{summoner.win ? 'Vitória' : 'Derrota'}</p>
+            <p className='match-kda'>
+                {`${summoner.kills < 10 ? '0'+summoner.kills : summoner.kills} /
+                  ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} /
+                  ${summoner.assists < 10 ? '0'+summoner.assists : summoner.assists}`}
+            </p>
             <div className='match-info'>
                 {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
                 {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
+            </div>
+            <div className='match-details'>
+                <span>-3</span>
             </div>
         </div>
         }

@@ -11,12 +11,14 @@
     justify-content: space-between;
     align-items: center;
     /* background-color: var(--panelcolor); */
-    padding: .8rem 1rem .8rem .8rem;
+    padding-left: .8rem;
     margin-bottom: 1rem;
     border-radius: 12px;
+    overflow: hidden;
 }
 
-.match img {
+.match > img {
+    margin: .8rem 0;
     width: 75px;
     height: 75px;
 }
@@ -51,4 +53,34 @@
     width: 40px;
     height: 40px;
     background-color: #050505;
+}
+
+.match-kda {
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+.match-details {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    /* background-color: #050505; */
+    padding: 0 .8rem;
+    cursor: pointer;
+}
+
+.victory .match-details {
+    background-color: #005f00;
+}
+
+.defeat .match-details {
+    background-color: #5f0000;
+}
+
+.victory .match-details:hover {
+    background-color: #003f00;
+}
+
+.defeat .match-details:hover {
+    background-color: #3f0000;
 }

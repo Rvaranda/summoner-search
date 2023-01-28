@@ -4,7 +4,7 @@ import './Mastery.css';
 function Mastery({data, champions}) {
   return (
     <>
-    <h2 style={{textAlign: 'center', marginTop: '1rem'}}>Maestrias</h2>
+    <h2 style={{textAlign: 'center', marginTop: '1rem'}}>Top 10 Maestrias</h2>
     <div className='masteries'>
       {data.map(mastery => {
         return (
