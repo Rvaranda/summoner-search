@@ -23,24 +23,24 @@
     height: 75px;
 }
 
-.match-items {
+.matchItems {
     display: flex;
     gap: .2rem;
     padding: .2rem;
     /* background-color: var(--darkblue); */
 }
 
-.match-items img {
+.matchItems img {
     width: 40px;
     height: 40px;
 }
 
-.match .match-result {
+.match .matchResult {
     font-size: 32px;
     font-weight: bold;
 }
 
-.match .match-info {
+.match .matchInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,19 +48,19 @@
     gap: .5rem;
 }
 
-.match .no-item {
+.match .noItem {
     display: inline-block;
     width: 40px;
     height: 40px;
     background-color: #050505;
 }
 
-.match-kda {
+.matchKda {
     margin-top: 5px;
     font-size: 20px;
 }
 
-.match-details {
+.matchDetails {
     display: flex;
     align-items: center;
     align-self: stretch;
@@ -69,18 +69,18 @@
     cursor: pointer;
 }
 
-.victory .match-details {
+.victory .matchDetails {
     background-color: #005f00;
 }
 
-.defeat .match-details {
+.defeat .matchDetails {
     background-color: #5f0000;
 }
 
-.victory .match-details:hover {
+.victory .matchDetails:hover {
     background-color: #003f00;
 }
 
-.defeat .match-details:hover {
+.defeat .matchDetails:hover {
     background-color: #3f0000;
 }

@@ -42,15 +42,15 @@
     font-weight: 700;
 }
 
-.mastery .level.level-7 span {
+.mastery .level.level7 span {
     background-color: cyan;
     color: black;
 }
 
-.mastery .level.level-6 span {
+.mastery .level.level6 span {
     background-color: purple;
 }
 
-.mastery .level.level-5 span {
+.mastery .level.level5 span {
     background-color: darkred;
 }

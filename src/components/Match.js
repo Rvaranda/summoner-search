@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { regionalEndpoint } from '../config.js';
 import { champIconsUrl, itemIconUrl } from '../config.js';
 
-import './Match.css';
+import style from './css/Match.module.css';
 
 function Match({summonerId, matchId, champions}) {
     const [matchData, setMatchData] = useState(null);

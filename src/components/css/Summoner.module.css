@@ -1,26 +1,26 @@
-.summoner-header {
+.summonerHeader {
     display: flex;
     gap: 3rem;
     padding-bottom: 1.5rem;
 }
 
-.summoner-header div {
+.summonerHeader div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
 }
 
-.summoner-header .name {
+.summonerHeader .name {
     font-size: 48px;
     font-weight: 700;
 }
 
-.summoner-header .level {
+.summonerHeader .level {
     font-size: 40px;
 }
 
-.summoner-header img {
+.summonerHeader img {
     width: 250px;
     height: 250px;
     border-radius: 50%;
