@@ -69,16 +69,18 @@ function App() {
 
   return (
     <div className='App'>
-      <form>
-        <div className='form-search'>
-          <input
-            type='text'
-            value={summonerName}
-            onChange={e => setSummonerName(e.target.value)}
-          />
-          <button type='submit' onClick={(e) => getSummoner(e)}>Pesquisar</button>
-        </div>
-      </form>
+      <header>
+        <form>
+          <div className='form-search'>
+            <input
+              type='text'
+              value={summonerName}
+              onChange={e => setSummonerName(e.target.value)}
+            />
+            <button type='submit' onClick={(e) => getSummoner(e)}>Pesquisar</button>
+          </div>
+        </form>
+      </header>
       {summonerError ? <h1 style={{textAlign: 'center'}}>Invocador não encontrado</h1> :
         <div className='wrapper'>
           {summonerData && (

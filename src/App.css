@@ -1,5 +1,10 @@
+.App > header {
+    padding: 25px;
+    margin-bottom: 15px;
+    background-color: #1d1d1d;
+}
+
 .form-search {
-    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,20 +21,19 @@
     width: 30%;
     outline: none; 
     border: none;
-    border-radius: 3px;
+    border-radius: 1px;
 }
 
 .form-search button {
-    background-color: #D9B71A;
+    background-color: #fff;
     border: none;
     cursor: pointer;
-    border-radius: .8rem;
+    border-radius: .1rem;
     font-weight: bold;
 }
 
 .form-search button:hover {
-    background-color: #ECC50F;
-    /* background-color: #F5BD08; */
+    background-color: #ddd;
 }
 
 .wrapper {
