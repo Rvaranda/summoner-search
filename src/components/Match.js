@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { regionalEndpoint } from '../config.js';
 import { champIconsUrl, itemIconUrl } from '../config.js';
 
-import style from './css/Match.module.css';
+import styles from './css/Match.module.css';
 
 function Match({summonerId, matchId, champions}) {
     const [matchData, setMatchData] = useState(null);
@@ -39,31 +39,31 @@ function Match({summonerId, matchId, champions}) {
     return (
         <>
         {(matchData && summoner) &&
-        <div className={`match ${summoner.win ? 'victory' : 'defeat'}`}>
+        <div className={[styles.match, styles[summoner.win ? 'victory' : 'defeat']].join(' ')}>
             <img
                 src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
                 alt='champ'
             />
-            <div className='match-items'>
-                {summoner.item0 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item0}.png`} alt='item'/>}
-                {summoner.item1 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item1}.png`} alt='item'/>}
-                {summoner.item2 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item2}.png`} alt='item'/>}
-                {summoner.item3 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item3}.png`} alt='item'/>}
-                {summoner.item4 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item4}.png`} alt='item'/>}
-                {summoner.item5 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item5}.png`} alt='item'/>}
-                {summoner.item6 === 0 ? <div className='no-item'></div> : <img src={`${itemIconUrl}/${summoner.item6}.png`} alt='item'/>}
+            <div className={styles.matchItems}>
+                {summoner.item0 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item0}.png`} alt='item'/>}
+                {summoner.item1 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item1}.png`} alt='item'/>}
+                {summoner.item2 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item2}.png`} alt='item'/>}
+                {summoner.item3 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item3}.png`} alt='item'/>}
+                {summoner.item4 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item4}.png`} alt='item'/>}
+                {summoner.item5 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item5}.png`} alt='item'/>}
+                {summoner.item6 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item6}.png`} alt='item'/>}
             </div>
-            <p className='match-result'>{summoner.win ? 'Vitória' : 'Derrota'}</p>
-            <p className='match-kda'>
+            <p className={styles.matchResult}>{summoner.win ? 'Vitória' : 'Derrota'}</p>
+            <p className={styles.matchKda}>
                 {`${summoner.kills < 10 ? '0'+summoner.kills : summoner.kills} /
                   ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} /
                   ${summoner.assists < 10 ? '0'+summoner.assists : summoner.assists}`}
             </p>
-            <div className='match-info'>
+            <div className={styles.matchInfo}>
                 {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
                 {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
             </div>
-            <div className='match-details'>
+            <div className={styles.matchDetails}>
                 <span>-3</span>
             </div>
         </div>

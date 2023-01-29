@@ -1,16 +1,16 @@
 import { profileIconUrl } from '../config';
-import style from './css/Summoner.module.css';
+import styles from './css/Summoner.module.css';
 
 function Summoner({data}) {
   return (
-    <div className={style.summonerHeader}>
+    <div className={styles.summonerHeader}>
       <img 
         src={`${profileIconUrl}/${data.profileIconId}.png`}
         alt='icon'
       />
       <div>
-        <p className={style.name}>{data.name}</p>
-        <p className={style.level}>Nível {data.summonerLevel}</p>
+        <p className={styles.name}>{data.name}</p>
+        <p className={styles.level}>Nível {data.summonerLevel}</p>
       </div>
     </div>
   );
