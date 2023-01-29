@@ -39,7 +39,8 @@ function Match({summonerId, matchId, champions}) {
     return (
         <>
         {(matchData && summoner) &&
-        <div className={[styles.match, styles[summoner.win ? 'victory' : 'defeat']].join(' ')}>
+        <div className={styles.match}>
+            <div className={styles[summoner.win ? 'victory' : 'defeat']}></div>
             <img
                 src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
                 alt='champ'
@@ -63,9 +64,9 @@ function Match({summonerId, matchId, champions}) {
                 {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
                 {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
             </div>
-            <div className={styles.matchDetails}>
+            {/* <div className={styles.matchDetails}>
                 <span>-3</span>
-            </div>
+            </div> */}
         </div>
         }
         </>

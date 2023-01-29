@@ -1,3 +1,9 @@
+.victory,
+.defeat {
+    width: 10px;
+    align-self: stretch;
+}
+
 .victory {
     background-color: #008f00;
 }
@@ -11,9 +17,10 @@
     justify-content: space-between;
     align-items: center;
     /* background-color: var(--panelcolor); */
-    padding-left: .8rem;
+    /* padding-left: .8rem; */
+    padding-bottom: 1rem;
     margin-bottom: 1rem;
-    border-radius: 12px;
+    border-bottom: 2px solid #070707;
     overflow: hidden;
 }
 
@@ -53,6 +60,7 @@
     width: 40px;
     height: 40px;
     background-color: #050505;
+    box-shadow: 0 0 12px 4px #555 inset;
 }
 
 .matchKda {
