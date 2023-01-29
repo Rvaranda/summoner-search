@@ -86,7 +86,7 @@ function App() {
           {summonerData && (
             <>
               <Summoner data={summonerData}/>
-              <hr style={{opacity: 0.6}}/>
+              <hr style={{opacity: .8}}/>
               {matchesId && (
                 <div className='match-list'>
                   <h2>Últimas partidas</h2>

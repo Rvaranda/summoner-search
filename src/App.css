@@ -1,6 +1,5 @@
 .App > header {
     padding: 25px;
-    margin-bottom: 15px;
     background-color: #1d1d1d;
 }
 
@@ -37,11 +36,11 @@
 }
 
 .wrapper {
-    background-color: #1e569f;
-    padding: 1rem;
+    /* background-color: #1e569f; */
+    padding: 1.5rem;
     margin: 0 auto;
     border-radius: 8px;
-    max-width: 1400px;
+    /* max-width: 1400px; */
 }
 
 .match-list {
