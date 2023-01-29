@@ -4,7 +4,6 @@ import styles from './css/Mastery.module.css';
 function Mastery({data, champions}) {
   return (
     <>
-    <h2 style={{textAlign: 'center', marginTop: '1rem'}}>Top 10 Maestrias</h2>
     <div className={styles.masteries}>
       {data.map(mastery => {
         return (

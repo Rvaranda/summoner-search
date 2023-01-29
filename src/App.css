@@ -43,9 +43,24 @@
     /* max-width: 1400px; */
 }
 
+.summoner-content {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.match-list,
+.mastery-list {
+    width: 50%;
+}
+
+.mastery-list {
+    margin-left: 2rem;
+}
+
 .match-list {
-    width: 70%;
-    margin: 60px auto;
+    margin: 0 auto;
+    border-right: 2px solid black;
+    padding-right: 2rem;
 }
 
 .match-list h2 {

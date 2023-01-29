@@ -1,8 +1,10 @@
 .masteries {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    row-gap: 2rem;
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
+    /* gap: 2.1rem; */
     margin: 2rem auto 0;
 }
 

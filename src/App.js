@@ -50,7 +50,7 @@ function App() {
   }
 
   function getMastery(id) {
-    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}/top?count=10`)
+    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`)
     .then(response => setSummonerMastery(response.data))
     .catch(error => {
       console.log(error);
@@ -87,13 +87,18 @@ function App() {
             <>
               <Summoner data={summonerData}/>
               <hr style={{opacity: .8}}/>
-              {matchesId && (
-                <div className='match-list'>
-                  <h2>Últimas partidas</h2>
-                  {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
-                </div>)}
-              {summonerMastery && 
-                <Mastery data={summonerMastery} champions={champions}/>}
+              <section className='summoner-content'>
+                {matchesId && (
+                  <div className='match-list'>
+                    <h2>Últimas partidas</h2>
+                    {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
+                  </div>)}
+                {summonerMastery && (
+                  <div className='mastery-list'>
+                    <h2 style={{textAlign: 'center'}}>Maestrias</h2>
+                    <Mastery data={summonerMastery} champions={champions}/>
+                  </div>)}
+              </section>
             </>
           )}
         </div>
