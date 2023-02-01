@@ -21,22 +21,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 .5rem 1rem;
     padding-bottom: 1rem;
-    margin-bottom: 1rem;
     border-bottom: 2px solid #070707;
     overflow: hidden;
 }
 
-.match > img {
-    margin: .8rem 0;
+.matchResult > img {
     width: 70px;
     height: 70px;
 }
 
 .matchType {
-    text-align: center;
-    width: 100px;
-    font-weight: bold;
+    width: 100%;
+    font-size: .9em;
 }
 
 .matchItems {
@@ -46,15 +44,23 @@
 }
 
 .matchItems img {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 }
 
-.match .matchResult {
-    font-size: 28px;
+.matchResult {
+    display: flex;
+    gap: 1rem;
+    align-self: stretch;
+    min-width: 265px;
+    margin: .8rem 0;
+    font-size: 1rem;
+}
+
+.resultText {
+    font-size: 21px;
     font-weight: bold;
     width: 100px;
-    text-align: center;
 }
 
 .match .matchInfo {
@@ -67,15 +73,15 @@
 
 .match .noItem {
     display: inline-block;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background-color: #050505;
     box-shadow: 0 0 12px 4px #555 inset;
 }
 
 .matchKda {
     margin-top: 5px;
-    font-size: 20px;
+    font-size: 1em;
 }
 
 .matchDetails {

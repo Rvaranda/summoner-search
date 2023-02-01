@@ -51,11 +51,21 @@ function Match({summonerId, matchId, champions}) {
         {(matchData && summoner) &&
         <div className={styles.match}>
             <div className={styles[matchData.info.gameDuration < 600 ? 'remake' : summoner.win ? 'victory' : 'defeat']}></div>
-            <p className={styles.matchType}>{matchTypes[matchData.info.queueId]}</p>
-            <img
-                src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
-                alt='champ'
-            />
+            <div className={styles.matchResult}>
+                <img
+                    src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
+                    alt='champ'
+                />
+                <div>
+                    <p className={styles.resultText}>{matchData.info.gameDuration < 600 ? 'Recriação' : summoner.win ? 'Vitória' : 'Derrota'}</p>
+                    <p className={styles.matchType}>{matchTypes[matchData.info.queueId]}</p>
+                    <p className={styles.matchKda}>
+                        <span>{`${summoner.kills < 10 ? '0'+summoner.kills : summoner.kills} `}</span>/
+                        <span>{` ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} `}</span>/
+                        <span>{` ${summoner.assists < 10 ? '0'+summoner.assists : summoner.assists}`}</span>
+                    </p>
+                </div>
+            </div>
             <div className={styles.matchItems}>
                 {summoner.item0 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item0}.png`} alt='item'/>}
                 {summoner.item1 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item1}.png`} alt='item'/>}
@@ -65,12 +75,6 @@ function Match({summonerId, matchId, champions}) {
                 {summoner.item5 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item5}.png`} alt='item'/>}
                 {summoner.item6 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item6}.png`} alt='item'/>}
             </div>
-            <p className={styles.matchResult}>{matchData.info.gameDuration < 600 ? 'Recriação' : summoner.win ? 'Vitória' : 'Derrota'}</p>
-            <p className={styles.matchKda}>
-                {`${summoner.kills < 10 ? '0'+summoner.kills : summoner.kills} /
-                  ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} /
-                  ${summoner.assists < 10 ? '0'+summoner.assists : summoner.assists}`}
-            </p>
             <div className={styles.matchInfo}>
                 {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
                 {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
