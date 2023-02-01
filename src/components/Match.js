@@ -5,6 +5,16 @@ import { champIconsUrl, itemIconUrl } from '../config.js';
 
 import styles from './css/Match.module.css';
 
+const matchTypes = {
+    400: 'Normal (Escolha Alternada)',
+    420: 'Ranqueada Solo/Duo',
+    430: 'Normal (Escolha às Cegas)',
+    440: 'Ranqueada Flex',
+    450: 'ARAM',
+    900: 'URF Aleatório',
+    1900: 'URF'
+};
+
 function Match({summonerId, matchId, champions}) {
     const [matchData, setMatchData] = useState(null);
     const [duration, setDuration] = useState(null);
@@ -40,7 +50,8 @@ function Match({summonerId, matchId, champions}) {
         <>
         {(matchData && summoner) &&
         <div className={styles.match}>
-            <div className={styles[summoner.win ? 'victory' : 'defeat']}></div>
+            <div className={styles[matchData.info.gameDuration < 600 ? 'remake' : summoner.win ? 'victory' : 'defeat']}></div>
+            <p className={styles.matchType}>{matchTypes[matchData.info.queueId]}</p>
             <img
                 src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
                 alt='champ'
@@ -54,7 +65,7 @@ function Match({summonerId, matchId, champions}) {
                 {summoner.item5 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item5}.png`} alt='item'/>}
                 {summoner.item6 === 0 ? <div className={styles.noItem}></div> : <img src={`${itemIconUrl}/${summoner.item6}.png`} alt='item'/>}
             </div>
-            <p className={styles.matchResult}>{summoner.win ? 'Vitória' : 'Derrota'}</p>
+            <p className={styles.matchResult}>{matchData.info.gameDuration < 600 ? 'Recriação' : summoner.win ? 'Vitória' : 'Derrota'}</p>
             <p className={styles.matchKda}>
                 {`${summoner.kills < 10 ? '0'+summoner.kills : summoner.kills} /
                   ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} /
@@ -64,9 +75,6 @@ function Match({summonerId, matchId, champions}) {
                 {duration && <p>{`${duration.minutes}:${duration.seconds}`}</p>}
                 {creationDate && <p>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</p>}
             </div>
-            {/* <div className={styles.matchDetails}>
-                <span>-3</span>
-            </div> */}
         </div>
         }
         </>
