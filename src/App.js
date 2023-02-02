@@ -1,18 +1,20 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+import Header from './components/Header';
 import Summoner from './components/Summoner';
 import Mastery from './components/Mastery';
-import { champIconsUrl, champUrl, endpoint, regionalEndpoint } from './config';
-import './App.css';
 import Match from './components/Match';
+
+import { champUrl, endpoint, regionalEndpoint } from './config';
+
+import './App.css';
 
 const user = 'glutão anônimo';
 
 function App() {
   const [summonerData, setSummonerData] = useState(null);
   const [summonerMastery, setSummonerMastery] = useState(null);
-  const [summonerName, setSummonerName] = useState('');
   const [matchesId, setMatchesId] = useState(null);
 
   const [summonerError, setSummonerError] = useState(false);
@@ -31,7 +33,7 @@ function App() {
     });
   }, []);
 
-  function getSummoner(e) {
+  function getSummoner(e, summonerName) {
     e.preventDefault();
 
     if (summonerName === '') return;
@@ -69,18 +71,7 @@ function App() {
 
   return (
     <div className='App'>
-      <header>
-        <form>
-          <div className='form-search'>
-            <input
-              type='text'
-              value={summonerName}
-              onChange={e => setSummonerName(e.target.value)}
-            />
-            <button type='submit' onClick={(e) => getSummoner(e)}>Pesquisar</button>
-          </div>
-        </form>
-      </header>
+      <Header getSummoner={getSummoner} />
       {summonerError ? <h1 style={{textAlign: 'center'}}>Invocador não encontrado</h1> :
         <div className='wrapper'>
           {summonerData && (
