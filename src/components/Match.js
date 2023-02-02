@@ -64,6 +64,12 @@ function Match({summonerId, matchId, champions}) {
                         <span>{` ${summoner.deaths < 10 ? '0'+summoner.deaths : summoner.deaths} `}</span>/
                         <span>{` ${summoner.assists < 10 ? '0'+summoner.assists : summoner.assists}`}</span>
                     </p>
+                    <div className={styles.matchInfoAlternative}>
+                        <p>
+                            {duration && <span>{`${duration.minutes}:${duration.seconds} - `}</span>}
+                            {creationDate && <span>{`${creationDate.day}/${creationDate.month}/${creationDate.year}`}</span>}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className={styles.matchItems}>

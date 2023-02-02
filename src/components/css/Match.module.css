@@ -1,8 +1,9 @@
 .victory,
 .defeat,
 .remake {
-    width: 10px;
+    min-width: 10px;
     align-self: stretch;
+    margin-right: 10px;
 }
 
 .victory {
@@ -24,23 +25,18 @@
     margin: 0 .5rem 1rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid #070707;
-    overflow: hidden;
-}
-
-.matchResult > img {
-    width: 70px;
-    height: 70px;
 }
 
 .matchType {
-    width: 100%;
-    font-size: .9em;
+    font-size: .8em;
+    opacity: .8;
 }
 
 .matchItems {
     display: flex;
     gap: .2rem;
     padding: .2rem;
+    min-width: 160px;
 }
 
 .matchItems img {
@@ -57,8 +53,13 @@
     font-size: 1rem;
 }
 
+.matchResult img {
+    width: 70px;
+    height: 70px;
+}
+
 .resultText {
-    font-size: 21px;
+    font-size: 1.4em; /*21px;*/
     font-weight: bold;
     width: 100px;
 }
@@ -71,7 +72,11 @@
     gap: .5rem;
 }
 
-.match .noItem {
+.match .matchInfoAlternative {
+    display: none;
+}
+
+.matchItems .noItem {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -106,4 +111,80 @@
 
 .defeat .matchDetails:hover {
     background-color: #3f0000;
+}
+
+@media only screen and (max-width: 1600px) {
+    .match {
+        font-size: .8rem;
+        margin: 0 0 1rem;
+    }
+    
+    .matchResult img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .matchItems img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .matchItems .noItem {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-color: #050505;
+        box-shadow: 0 0 12px 4px #555 inset;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .matchItems {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width: 1350px) {
+    .match .matchInfo {
+        display: none;
+    }
+    
+    .match .matchInfoAlternative {
+        display: block;
+        margin-top: .5em;
+        font-size: .8em;
+    }
+
+    .matchResult img {
+        align-self: center;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .match .matchInfo {
+        display: flex;
+    }
+    
+    .match .matchInfoAlternative {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .match .matchInfo {
+        display: none;
+    }
+    
+    .match .matchInfoAlternative {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .match {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
 }
