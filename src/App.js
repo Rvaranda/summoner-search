@@ -6,11 +6,9 @@ import Summoner from './components/Summoner';
 import Mastery from './components/Mastery';
 import Match from './components/Match';
 
-import { champUrl, endpoint, regionalEndpoint } from './config';
+import { champUrl, endpoint } from './config';
 
 import './App.css';
-
-const user = 'glutão anônimo';
 
 function App() {
   const [summonerData, setSummonerData] = useState(null);
@@ -38,7 +36,7 @@ function App() {
 
     if (summonerName === '') return;
 
-    endpoint.get(`/lol/summoner/v4/summoners/by-name/${summonerName}`)
+    endpoint.get(`/summoner?summonerName=${summonerName}`)
     .then(response => {
       setSummonerError(false);
       setSummonerData(response.data);
@@ -52,7 +50,7 @@ function App() {
   }
 
   function getMastery(id) {
-    endpoint.get(`/lol/champion-mastery/v4/champion-masteries/by-summoner/${id}`)
+    endpoint.get(`/masteries?summonerId=${id}`)
     .then(response => setSummonerMastery(response.data))
     .catch(error => {
       console.log(error);
@@ -61,7 +59,7 @@ function App() {
   }
 
   function getMatches(id) {
-    regionalEndpoint.get(`/lol/match/v5/matches/by-puuid/${id}/ids?start=0&count=10`)
+    endpoint.get(`/matches?summonerPuuid=${id}`)
     .then(response => setMatchesId(response.data))
     .catch(error => {
       console.log(error);

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { regionalEndpoint } from '../config.js';
-import { champIconsUrl, itemIconUrl } from '../config.js';
+import { endpoint, champIconsUrl, itemIconUrl } from '../config.js';
 
 import styles from './css/Match.module.css';
 
@@ -22,7 +21,7 @@ function Match({summonerId, matchId, champions}) {
     const [summoner, setSummoner] = useState(null);
 
     useEffect(() => {
-        regionalEndpoint.get(`/lol/match/v5/matches/${matchId}`)
+        endpoint.get(`/match?matchId=${matchId}`)
         .then(response => {
             response.data.info.participants.forEach(element => {
                 if (element.puuid === summonerId) setSummoner(element);
