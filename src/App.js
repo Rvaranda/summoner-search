@@ -15,7 +15,9 @@ import Loading from './components/Loading';
 function App() {
   const [summonerData, setSummonerData] = useState(null);
   const [summonerMastery, setSummonerMastery] = useState(null);
+
   const [matchesId, setMatchesId] = useState(null);
+  const [matchesDetails, setMatchesDetails] = useState(null);
 
   const [summonerError, setSummonerError] = useState(false);
   const [errorInfo, setErrorInfo] = useState(null);
@@ -48,9 +50,14 @@ function App() {
       const masteriesResponse = await endpoint.get(`/masteries?summonerId=${response.data.id}`);
       const matchesResponse = await endpoint.get(`/matches?summonerPuuid=${response.data.puuid}`);
 
+      const matchesDetailsResponse = await Promise.all(matchesResponse.data.map(element => {
+        return endpoint.get(`/match?matchId=${element}`);
+      }));
+
       setSummonerData(response.data);
       setSummonerMastery(masteriesResponse.data);
       setMatchesId(matchesResponse.data);
+      setMatchesDetails(matchesDetailsResponse.map(element => element.data));
 
       setSummonerError(false);
     }
@@ -79,7 +86,7 @@ function App() {
                   {matchesId && (
                     <div className='match-list'>
                       <h2>Últimas partidas</h2>
-                      {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions} />)}
+                      {matchesDetails.map(match => <Match key={match.metadata.matchId} summonerId={summonerData.puuid} matchDetail={match} champions={champions} />)}
                     </div>)}
                   {summonerMastery && (
                     <div className='mastery-list'>
