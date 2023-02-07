@@ -51,15 +51,16 @@
 
 .mastery .level.level7 span {
     background-color: cyan;
-    color: black;
 }
 
 .mastery .level.level6 span {
     background-color: purple;
+    color: white;
 }
 
 .mastery .level.level5 span {
     background-color: darkred;
+    color: white;
 }
 
 @media only screen and (max-width: 1600px) {

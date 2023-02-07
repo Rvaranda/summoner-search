@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Summoner from './components/Summoner';
 import Mastery from './components/Mastery';
 import Match from './components/Match';
+import Error from './components/Error';
 
 import { champUrl, endpoint } from './config';
 
@@ -16,6 +17,7 @@ function App() {
   const [matchesId, setMatchesId] = useState(null);
 
   const [summonerError, setSummonerError] = useState(false);
+  const [errorInfo, setErrorInfo] = useState(null);
 
   const [champions, setChampions] = useState(null);
 
@@ -45,7 +47,8 @@ function App() {
     })
     .catch(error => {
       console.log(error);
-      setSummonerError(true)
+      setSummonerError(true);
+      setErrorInfo(error);
     });
   }
 
@@ -55,6 +58,7 @@ function App() {
     .catch(error => {
       console.log(error);
       setSummonerError(true);
+      setErrorInfo(error);
     })
   }
 
@@ -64,13 +68,14 @@ function App() {
     .catch(error => {
       console.log(error);
       setSummonerError(true);
+      setErrorInfo(error);
     })
   }
 
   return (
     <div className='App'>
       <Header getSummoner={getSummoner} />
-      {summonerError ? <h1 style={{textAlign: 'center'}}>Invocador não encontrado</h1> :
+      {summonerError ? (errorInfo && <Error err={errorInfo}/>) :
         <div className='wrapper'>
           {summonerData && (
             <>
