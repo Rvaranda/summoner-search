@@ -10,6 +10,7 @@ import Error from './components/Error';
 import { champUrl, endpoint } from './config';
 
 import './App.css';
+import Loading from './components/Loading';
 
 function App() {
   const [summonerData, setSummonerData] = useState(null);
@@ -21,82 +22,76 @@ function App() {
 
   const [champions, setChampions] = useState(null);
 
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     axios.get(`${champUrl}.json`)
-    .then(response => {
-      let obj = response.data.data;
-      let newObj = {};
-      for (let x in obj) {
-        newObj[obj[x].key] = obj[x];
-      }
-      setChampions(newObj);
-    });
+      .then(response => {
+        let obj = response.data.data;
+        let newObj = {};
+        for (let x in obj) {
+          newObj[obj[x].key] = obj[x];
+        }
+        setChampions(newObj);
+      });
   }, []);
 
-  function getSummoner(e, summonerName) {
+  async function getSummonerData(e, summonerName) {
     e.preventDefault();
 
     if (summonerName === '') return;
 
-    endpoint.get(`/summoner?summonerName=${summonerName}`)
-    .then(response => {
-      setSummonerError(false);
+    setLoading(true);
+
+    try {
+      const response = await endpoint.get(`/summoner?summonerName=${summonerName}`);
+      const masteriesResponse = await endpoint.get(`/masteries?summonerId=${response.data.id}`);
+      const matchesResponse = await endpoint.get(`/matches?summonerPuuid=${response.data.puuid}`);
+
       setSummonerData(response.data);
-      getMastery(response.data.id);
-      getMatches(response.data.puuid);
-    })
-    .catch(error => {
-      console.log(error);
-      setSummonerError(true);
-      setErrorInfo(error);
-    });
-  }
+      setSummonerMastery(masteriesResponse.data);
+      setMatchesId(matchesResponse.data);
 
-  function getMastery(id) {
-    endpoint.get(`/masteries?summonerId=${id}`)
-    .then(response => setSummonerMastery(response.data))
-    .catch(error => {
-      console.log(error);
+      setSummonerError(false);
+    }
+    catch (err) {
+      console.log(err);
       setSummonerError(true);
-      setErrorInfo(error);
-    })
-  }
-
-  function getMatches(id) {
-    endpoint.get(`/matches?summonerPuuid=${id}`)
-    .then(response => setMatchesId(response.data))
-    .catch(error => {
-      console.log(error);
-      setSummonerError(true);
-      setErrorInfo(error);
-    })
+      setErrorInfo(err);
+    }
+    finally {
+      setLoading(false);
+    }
   }
 
   return (
     <div className='App'>
-      <Header getSummoner={getSummoner} />
-      {summonerError ? (errorInfo && <Error err={errorInfo}/>) :
-        <div className='wrapper'>
-          {summonerData && (
-            <>
-              <Summoner data={summonerData}/>
-              <hr style={{opacity: .8}}/>
-              <section className='summoner-content'>
-                {matchesId && (
-                  <div className='match-list'>
-                    <h2>Últimas partidas</h2>
-                    {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions}/>)}
-                  </div>)}
-                {summonerMastery && (
-                  <div className='mastery-list'>
-                    <h2 style={{textAlign: 'center'}}>Maestrias</h2>
-                    <Mastery data={summonerMastery} champions={champions}/>
-                  </div>)}
-              </section>
-            </>
-          )}
-        </div>
-      }
+      <Header getSummonerData={getSummonerData} />
+      <Loading loading={loading} />
+      {!loading && <>
+        {summonerError ? <Error err={errorInfo} /> :
+          <div className='wrapper'>
+            {summonerData && (
+              <>
+                <Summoner data={summonerData} />
+                <hr style={{ opacity: .8 }} />
+                <section className='summoner-content'>
+                  {matchesId && (
+                    <div className='match-list'>
+                      <h2>Últimas partidas</h2>
+                      {matchesId.map(id => <Match key={id} summonerId={summonerData.puuid} matchId={id} champions={champions} />)}
+                    </div>)}
+                  {summonerMastery && (
+                    <div className='mastery-list'>
+                      <h2 style={{ textAlign: 'center' }}>Maestrias</h2>
+                      <Mastery data={summonerMastery} champions={champions} />
+                    </div>)}
+                </section>
+              </>
+            )}
+          </div>
+        }
+      </>}
     </div>
   );
 }
