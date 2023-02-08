@@ -6,11 +6,11 @@ import Summoner from './components/Summoner';
 import Mastery from './components/Mastery';
 import Match from './components/Match';
 import Error from './components/Error';
+import LoadingIcon from './components/LoadingIcon';
 
 import { champUrl, endpoint } from './config';
 
 import './App.css';
-import Loading from './components/Loading';
 
 function App() {
   const [summonerData, setSummonerData] = useState(null);
@@ -74,31 +74,32 @@ function App() {
   return (
     <div className='App'>
       <Header getSummonerData={getSummonerData} />
-      <Loading loading={loading} />
-      {!loading && <>
-        {summonerError ? <Error err={errorInfo} /> :
-          <div className='wrapper'>
-            {summonerData && (
-              <>
-                <Summoner data={summonerData} />
-                <hr style={{ opacity: .8 }} />
-                <section className='summoner-content'>
-                  {matchesId && (
-                    <div className='match-list'>
-                      <h2>Últimas partidas</h2>
-                      {matchesDetails.map(match => <Match key={match.metadata.matchId} summonerId={summonerData.puuid} matchDetail={match} champions={champions} />)}
-                    </div>)}
-                  {summonerMastery && (
-                    <div className='mastery-list'>
-                      <h2 style={{ textAlign: 'center' }}>Maestrias</h2>
-                      <Mastery data={summonerMastery} champions={champions} />
-                    </div>)}
-                </section>
-              </>
-            )}
-          </div>
-        }
-      </>}
+      {loading ? <LoadingIcon /> :
+        <>
+          {summonerError ? <Error err={errorInfo} /> :
+            <div className='wrapper'>
+              {summonerData && (
+                <>
+                  <Summoner data={summonerData} />
+                  <hr style={{ opacity: .8 }} />
+                  <section className='summoner-content'>
+                    {matchesId && (
+                      <div className='match-list'>
+                        <h2>Últimas partidas</h2>
+                        {matchesDetails.map(match => <Match key={match.metadata.matchId} summonerId={summonerData.puuid} matchDetail={match} champions={champions} />)}
+                      </div>)}
+                    {summonerMastery && (
+                      <div className='mastery-list'>
+                        <h2 style={{ textAlign: 'center' }}>Maestrias</h2>
+                        <Mastery data={summonerMastery} champions={champions} />
+                      </div>)}
+                  </section>
+                </>
+              )}
+            </div>
+          }
+        </>
+      }
     </div>
   );
 }
