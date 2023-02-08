@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
-function Header({ getSummonerData }) {
+function Header({ loading, getSummonerData }) {
   const [summonerName, setSummonerName] = useState('');
+  const inputElement = useRef();
 
   return (
     <header>
@@ -11,8 +12,15 @@ function Header({ getSummonerData }) {
             type='text'
             value={summonerName}
             onChange={e => setSummonerName(e.target.value)}
+            ref={inputElement}
           />
-          <button type='submit' onClick={e => getSummonerData(e, summonerName)}>Pesquisar</button>
+          <button
+            type='submit'
+            onClick={e => { getSummonerData(e, summonerName); inputElement.current.blur(); }}
+            disabled={loading}
+          >
+            Pesquisar
+          </button>
         </div>
       </form>
     </header>

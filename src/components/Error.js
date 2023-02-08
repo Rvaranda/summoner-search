@@ -12,8 +12,8 @@ const pStyle = {
 
 const errorMessages = [(
     <>
-    <h1 style={h1Style}>Invocador não encontrado</h1>
-    <p style={pStyle}>Verifique se o nome do invocador está correto</p>
+        <h1 style={h1Style}>Invocador não encontrado</h1>
+        <p style={pStyle}>Verifique se o nome do invocador está correto</p>
     </>
 ), (
     <h1 style={h1Style}>Erro inesperado. Tente novamente mais tarde</h1>
@@ -22,7 +22,7 @@ const errorMessages = [(
 function Error({ err }) {
     return (
         <>
-        {err.response.status === 404 ? errorMessages[0] : errorMessages[1]}
+            {err.response?.status === 404 ? errorMessages[0] : errorMessages[1]}
         </>
     );
 }

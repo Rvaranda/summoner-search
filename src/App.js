@@ -73,7 +73,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Header getSummonerData={getSummonerData} />
+      <Header loading={loading} getSummonerData={getSummonerData} />
       {loading ? <LoadingIcon /> :
         <>
           {summonerError ? <Error err={errorInfo} /> :
