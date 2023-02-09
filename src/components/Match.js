@@ -49,7 +49,7 @@ function Match({ summonerId, matchDetail, champions }) {
                     <div className={styles[matchData.info.gameDuration < 600 ? 'remake' : summoner.win ? 'victory' : 'defeat']}></div>
                     <div className={styles.matchResult}>
                         <img
-                            src={`${champIconsUrl}/${champions[summoner.championId].image.full}`}
+                            src={`${champIconsUrl}/${champions[summoner.championId]?.image.full}`}
                             alt='champ'
                         />
                         <div>
