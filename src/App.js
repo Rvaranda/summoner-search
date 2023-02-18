@@ -7,6 +7,7 @@ import Mastery from './components/Mastery';
 import Match from './components/Match';
 import Error from './components/Error';
 import LoadingIcon from './components/LoadingIcon';
+import Welcome from './components/Welcome';
 
 import { champUrl, endpoint } from './config';
 
@@ -26,6 +27,8 @@ function App() {
 
   const [loading, setLoading] = useState(false);
 
+  const [showWelcomeMsg, setShowWelcomeMsg] = useState(true);
+
   useEffect(() => {
     axios.get(`${champUrl}.json`)
       .then(response => {
@@ -43,6 +46,7 @@ function App() {
 
     if (summonerName === '') return;
 
+    setShowWelcomeMsg(false);
     setLoading(true);
 
     try {
@@ -74,6 +78,7 @@ function App() {
   return (
     <div className='App'>
       <Header loading={loading} getSummonerData={getSummonerData} />
+      {showWelcomeMsg && <Welcome />}
       {loading ? <LoadingIcon /> :
         <>
           {summonerError ? <Error err={errorInfo} /> :
