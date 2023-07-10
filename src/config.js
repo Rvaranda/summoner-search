@@ -6,5 +6,5 @@ export const profileIconUrl = 'https://ddragon.leagueoflegends.com/cdn/13.1.1/im
 export const itemIconUrl = 'https://ddragon.leagueoflegends.com/cdn/13.1.1/img/item';
 
 export const endpoint = axios.create({
-    baseURL: 'https://summoner-search.herokuapp.com',
+  baseURL: "https://summoner-search.onrender.com",
 });
